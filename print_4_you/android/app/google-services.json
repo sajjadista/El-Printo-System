@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "34101517065",
+    "project_id": "print4you-de72a",
+    "storage_bucket": "print4you-de72a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34101517065:android:77f9356ad4bb3eb9b251d8",
+        "android_client_info": {
+          "package_name": "com.example.print_4_you"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34101517065-4h98fep33s2krhtffrk2tqrknve4jgps.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJGm50OzYz7tIQiPVu9ggL3JekL4Mk3q4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34101517065-4h98fep33s2krhtffrk2tqrknve4jgps.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
