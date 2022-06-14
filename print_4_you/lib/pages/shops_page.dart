@@ -4,7 +4,6 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:location/location.dart';
 
 class ShopsPage extends StatelessWidget {
   const ShopsPage({Key? key}) : super(key: key);
@@ -17,17 +16,40 @@ class ShopsPage extends StatelessWidget {
       //Shop1 location
       Marker(
         point: LatLng(2.9993,101.7079),
-        builder: (ctx) => Image(image: AssetImage('shop-icon.png'),),
-      ),
+        builder: (ctx) =>
+            InkWell(
+              onTap: () {},
+              child: Image.asset(
+                'shop-icon.png',
+                width: 22,
+                fit: BoxFit.cover,
+              ),
+            ),),
       //Shop2 location
       Marker(
         point: LatLng(2.992829362,101.704663848),
-        builder: (ctx) => Image(image: AssetImage('shop-icon.png'),),
+        builder: (ctx) =>
+            InkWell(
+              onTap: () {},
+              child: Image.asset(
+                'shop-icon.png',
+                width: 22,
+                fit: BoxFit.cover,
+              ),
+            ),
       ),
       //Shop3 location
       Marker(
         point: LatLng(2.996829362,101.7033),
-        builder: (ctx) => Image(image: AssetImage('shop-icon.png'),),
+        builder: (ctx) =>
+            InkWell(
+              onTap: () {},
+              child: Image.asset(
+                  'shop-icon.png',
+                   width: 22,
+                   fit: BoxFit.cover,
+              ),
+            ),
       ),
     ];
 
