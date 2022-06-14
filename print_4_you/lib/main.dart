@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:print_4_you/pages/main_page.dart';
+import 'package:print_4_you/pages/upload_document_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,12 +18,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Print4You',
         theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-            primaryColor: const Color(0xFFE40323),
-            textTheme: GoogleFonts.montserratTextTheme()
-            // colorScheme: ColorScheme.fromSwatch()
-            //     .copyWith(secondary: const Color(0xFF2ca7a4)),
-            ),
+          scaffoldBackgroundColor: Colors.white,
+          primaryColor: const Color(0xFFE40323),
+          textTheme: GoogleFonts.montserratTextTheme(),
+        ),
         home: const MainPage(),
         routes: <String, WidgetBuilder>{
           '/mainpage': (BuildContext context) => const MainPage(),
