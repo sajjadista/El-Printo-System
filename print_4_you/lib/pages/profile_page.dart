@@ -42,7 +42,7 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(height: 10),
                 Text("Home address",
                     style: TextStyle(fontWeight: FontWeight.bold)),
-                Text("+60 139459295"),
+                Text("KMR OnePutra"),
               ],
             ),
           ),

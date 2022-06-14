@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:print_4_you/pages/login_page.dart';
 import 'package:print_4_you/pages/main_page.dart';
 
 void main() {
@@ -23,8 +24,9 @@ class MyApp extends StatelessWidget {
             // colorScheme: ColorScheme.fromSwatch()
             //     .copyWith(secondary: const Color(0xFF2ca7a4)),
             ),
-        home: const MainPage(),
+        home: const LoginPage(),
         routes: <String, WidgetBuilder>{
+          '/loginpage': (BuildContext context) => const LoginPage(),
           '/mainpage': (BuildContext context) => const MainPage(),
         });
   }
