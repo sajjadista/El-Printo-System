@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: const Color(0xFFFF3642)),
+                color: const Color(0xFFE40323)),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Row(
@@ -42,23 +42,26 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: const Color(0xFFFF3642)),
-            child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    Image(image: AssetImage("assets/printer.png")),
-                    Text("Order now!",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold))
-                  ],
-                )),
+          GestureDetector(
+            onTap: (() => Navigator.pushNamed(context, '/uploaddoc')),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xFFE40323)),
+              child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: const [
+                      Image(image: AssetImage("assets/printer.png")),
+                      Text("Order now!",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold))
+                    ],
+                  )),
+            ),
           )
         ],
       ),

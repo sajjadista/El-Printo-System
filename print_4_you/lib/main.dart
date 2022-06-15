@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           '/loginpage': (BuildContext context) => const LoginPage(),
           '/mainpage': (BuildContext context) => const MainPage(),
+          '/uploaddoc': (BuildContext context) => const UploadDocumentPage(),
         });
   }
 }
