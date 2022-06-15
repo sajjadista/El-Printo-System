@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:print_4_you/pages/login_page.dart';
 import 'package:print_4_you/pages/main_page.dart';
+import 'package:print_4_you/pages/select_payment_page.dart';
 import 'package:print_4_you/pages/upload_document_page.dart';
 
 void main() {
@@ -22,12 +23,15 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           primaryColor: const Color(0xFFE40323),
           textTheme: GoogleFonts.montserratTextTheme(),
+          colorScheme:
+              ColorScheme.fromSwatch(accentColor: const Color(0xFFE40323)),
         ),
-        home: const MainPage(),
+        home: const SelectPaymentPage(),
         routes: <String, WidgetBuilder>{
           '/loginpage': (BuildContext context) => const LoginPage(),
           '/mainpage': (BuildContext context) => const MainPage(),
           '/uploaddoc': (BuildContext context) => const UploadDocumentPage(),
+          '/selectpay': (BuildContext context) => const SelectPaymentPage(),
         });
   }
 }

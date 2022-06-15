@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,12 +27,14 @@ class HomePage extends StatelessWidget {
                   RichText(
                       text: TextSpan(
                           style: GoogleFonts.montserrat(fontSize: 17),
-                          children: const [
-                        TextSpan(
+                          children: [
+                        const TextSpan(
                             text: "E-Wallet Balance\n",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20)),
-                        TextSpan(text: "As of June 14 2022")
+                        TextSpan(
+                            text:
+                                "As of ${DateFormat.yMMMd().format(DateTime.now())}")
                       ])),
                   const Text("RM 85.50",
                       style: TextStyle(
