@@ -5,6 +5,7 @@ import 'package:print_4_you/pages/delivery_details_page.dart';
 import 'package:print_4_you/pages/delivery_details_page.dart';
 import 'package:print_4_you/pages/login_page.dart';
 import 'package:print_4_you/pages/main_page.dart';
+import 'package:print_4_you/pages/order_summary_page.dart';
 import 'package:print_4_you/pages/printing_preferences_page.dart';
 import 'package:print_4_you/pages/select_payment_page.dart';
 import 'package:print_4_you/pages/shops_page.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
               const DeliveryDetailsPage(),
           '/shopsmap': (BuildContext context) => const ShopsPage(),
           '/selectpay': (BuildContext context) => const SelectPaymentPage(),
+          '/ordersummary': (BuildContext context) => const OrderSummaryPage(),
         });
   }
 }
