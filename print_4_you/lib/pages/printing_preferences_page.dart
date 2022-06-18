@@ -391,7 +391,9 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                           borderRadius: BorderRadius.circular(15),
                         ), // Background color
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/deliverydetails");
+                      },
                       child: const Text(
                         "Next",
                         style: TextStyle(
