@@ -87,7 +87,9 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                   borderRadius: BorderRadius.circular(15),
                 ), // Background color
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, "/printpref");
+              },
               child: const Text(
                 "Next",
                 style: TextStyle(
