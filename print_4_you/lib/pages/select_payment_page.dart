@@ -20,8 +20,8 @@ class _SelectPaymentPageState extends State<SelectPaymentPage> {
         backgroundColor: const Color(0xFFE40323),
         title: const Center(
             child: Text(
-          "Select payment method",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          "Payment Method",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         )),
         automaticallyImplyLeading: false,
       ),

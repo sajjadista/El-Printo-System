@@ -23,7 +23,7 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Select Printing Preferences",
+          "Printing Preferences",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

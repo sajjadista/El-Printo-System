@@ -27,7 +27,7 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Select Delivery Details",
+            "Delivery Details",
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
