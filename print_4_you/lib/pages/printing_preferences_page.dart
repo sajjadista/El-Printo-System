@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PrintingPreferencesPage extends StatefulWidget {
   const PrintingPreferencesPage({Key? key}) : super(key: key);
@@ -13,13 +14,37 @@ class PrintingPreferencesPage extends StatefulWidget {
 class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
   String? colorStyle;
   int? numberOfCopies;
-  String? pagesRange;
+  int? fromPage;
+  int? toPage;
   bool? isAllPages = false;
   String? printQuality;
   String? paperSide;
 
+  TextEditingController fromController = TextEditingController();
+  TextEditingController toController = TextEditingController();
+
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initPrefs();
+  }
+
+  initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(colorStyle);
+    print(numberOfCopies);
+    print(fromPage);
+    print(toPage);
+    print(isAllPages);
+    print(printQuality);
+    print(paperSide);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -121,6 +146,8 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                     height: 45,
                     width: 100,
                     child: TextField(
+                      onChanged: (value) =>
+                          setState(() => numberOfCopies = int.parse(value)),
                       cursorColor: Colors.red,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
@@ -167,10 +194,13 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                     height: 45,
                     width: 50,
                     child: TextField(
+                      controller: fromController,
+                      onChanged: (value) =>
+                          setState(() => fromPage = int.tryParse(value)),
                       cursorColor: Colors.red,
                       textAlign: TextAlign.center,
                       enabled: !isAllPages!,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.red,
                           fontSize: 17,
                           fontWeight: FontWeight.bold),
@@ -196,9 +226,12 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                     height: 45,
                     width: 50,
                     child: TextField(
+                      controller: toController,
+                      onChanged: (value) =>
+                          setState(() => toPage = int.tryParse(value)),
                       cursorColor: Colors.red,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.red,
                           fontSize: 17,
                           fontWeight: FontWeight.bold),
@@ -214,7 +247,7 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Checkbox(
@@ -224,6 +257,12 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                     onChanged: (value) {
                       setState(() {
                         isAllPages = value;
+                        if (isAllPages!) {
+                          toPage = null;
+                          fromPage = null;
+                          toController.clear();
+                          fromController.clear();
+                        }
                       });
                     },
                   ),
@@ -382,28 +421,45 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 200,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color(0xFFE40323),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ), // Background color
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/deliverydetails");
-                      },
-                      child: const Text(
-                        "Next",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
+                  (colorStyle == null ||
+                          numberOfCopies == null ||
+                          ((fromPage == null || toPage == null) &&
+                              (isAllPages == null || isAllPages == false)) ||
+                          printQuality == null ||
+                          paperSide == null)
+                      ? const SizedBox()
+                      : SizedBox(
+                          width: 200,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color(0xFFE40323),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                            onPressed: () {
+                              prefs.setString("colorStyle", colorStyle!);
+                              prefs.setInt("numberOfCopies", numberOfCopies!);
+                              if (isAllPages == null || isAllPages == false) {
+                                prefs.setInt("fromPage", fromPage!);
+                                prefs.setInt("toPage", toPage!);
+                              } else {
+                                prefs.setBool("isAllPages", isAllPages!);
+                              }
+                              prefs.setString("printQuality", printQuality!);
+                              prefs.setString("paperSide", paperSide!);
+                              Navigator.pushNamed(context, "/deliverydetails");
+                            },
+                            child: const Text(
+                              "Next",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ],
