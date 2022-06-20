@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,6 +12,34 @@ class UploadDocumentPage extends StatefulWidget {
 }
 
 class _UploadDocumentPageState extends State<UploadDocumentPage> {
+  PlatformFile? document;
+  bool? isDocumentUploaded = false;
+
+  void uploadDocument() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'jpg',
+        'jpeg',
+        'png',
+        'pdf',
+        'doc',
+        'docx',
+        'ppt',
+        'pptx',
+        'xls',
+        'xlsx',
+      ],
+    );
+
+    if (result != null) {
+      document = result.files.single;
+      setState(() {
+        isDocumentUploaded = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,36 +72,68 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                     color: const Color(0xFFE40323),
                     borderRadius: BorderRadius.circular(15)),
                 child: Center(
-                  child: SizedBox(
-                    height: 75,
-                    width: 215,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ), // Background color
-                      ),
-                      onPressed: () {},
-                      child: Row(
-                        children: const [
-                          Icon(
-                            Icons.file_upload_outlined,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                          Text(
-                            "Upload Document",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                  child: isDocumentUploaded!
+                      ? ColoredBox(
+                          color: Colors.white,
+                          child: Row(children: [
+                            Text(
+                              document!.name,
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    document = null;
+                                    isDocumentUploaded = false;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.highlight_remove_rounded,
+                                  color: Colors.red,
+                                ))
+                          ]),
+                        )
+                      : SizedBox(
+                          height: 75,
+                          width: 215,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ), // Background color
+                            ),
+                            onPressed: () {
+                              uploadDocument();
+                            },
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.file_upload_outlined,
+                                  color: Colors.black,
+                                  size: 30,
+                                ),
+                                Text(
+                                  "Upload Document",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        ),
                 ),
               ),
             ),

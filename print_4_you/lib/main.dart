@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           colorScheme:
               ColorScheme.fromSwatch(accentColor: const Color(0xFFE40323)),
         ),
-        home: const MainPage(),
+        home: const UploadDocumentPage(),
         routes: <String, WidgetBuilder>{
           '/loginpage': (BuildContext context) => const LoginPage(),
           '/mainpage': (BuildContext context) => const MainPage(),
