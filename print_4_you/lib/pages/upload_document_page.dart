@@ -87,9 +87,11 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                 child: Center(
                   child: isDocumentUploaded!
                       ? Row(children: [
+                          const SizedBox(width: 20),
                           Expanded(
                             child: Text(
                               document!.name,
+                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -112,7 +114,8 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                               child: const Icon(
                                 Icons.highlight_remove_rounded,
                                 color: Colors.red,
-                              ))
+                              )),
+                          const SizedBox(width: 20),
                         ])
                       : SizedBox(
                           height: 75,

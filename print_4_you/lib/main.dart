@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
               const DeliveryDetailsPage(),
           '/shopsmap': (BuildContext context) => ShopsPage(),
           '/selectpay': (BuildContext context) => const SelectPaymentPage(),
-          '/ordersummary': (BuildContext context) => const OrderSummaryPage(),
         });
   }
 }
