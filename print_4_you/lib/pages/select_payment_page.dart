@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:print_4_you/pages/order_summary_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectPaymentPage extends StatefulWidget {
@@ -127,11 +128,18 @@ class _SelectPaymentPageState extends State<SelectPaymentPage> {
                               "pagerange": pagerange
                             };
 
-                            db.collection("orders").add(order).then(
-                                (DocumentReference doc) => print(
-                                    'DocumentSnapshot added with ID: ${doc.id}'));
+                            String docId = "";
+                            final navigator = Navigator.of(context);
 
-                            Navigator.popAndPushNamed(context, '/ordersummary');
+                            await db.collection("orders").add(order).then(
+                                (DocumentReference doc) => docId = doc.id);
+
+                            navigator.push(
+                              MaterialPageRoute(
+                                  builder: (context) => OrderSummaryPage(
+                                        docId: docId,
+                                      )),
+                            );
                           },
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
