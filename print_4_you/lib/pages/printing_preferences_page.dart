@@ -438,7 +438,8 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                               ),
                             ),
                             onPressed: () {
-                              prefs.setString("colorStyle", colorStyle!);
+                              prefs.setBool(
+                                  "colorStyle", colorStyle == "Colored");
                               prefs.setInt("numberOfCopies", numberOfCopies!);
                               if (isAllPages == null || isAllPages == false) {
                                 prefs.setInt("fromPage", fromPage!);
@@ -447,7 +448,8 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                                 prefs.setBool("isAllPages", isAllPages!);
                               }
                               prefs.setString("printQuality", printQuality!);
-                              prefs.setString("paperSide", paperSide!);
+                              prefs.setBool(
+                                  "paperSide", paperSide == "Double-Sided");
                               Navigator.pushNamed(context, "/deliverydetails");
                             },
                             child: const Text(

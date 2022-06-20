@@ -103,7 +103,7 @@ class _MainPageState extends State<MainPage> {
       case 1:
         return OrdersPage();
       case 2:
-        return const ShopsPage();
+        return ShopsPage(fromHomePage: true);
       case 3:
         return const ProfilePage();
       default:

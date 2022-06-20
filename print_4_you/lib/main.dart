@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
               const PrintingPreferencesPage(),
           '/deliverydetails': (BuildContext context) =>
               const DeliveryDetailsPage(),
-          '/shopsmap': (BuildContext context) => const ShopsPage(),
+          '/shopsmap': (BuildContext context) => ShopsPage(),
           '/selectpay': (BuildContext context) => const SelectPaymentPage(),
           '/ordersummary': (BuildContext context) => const OrderSummaryPage(),
         });

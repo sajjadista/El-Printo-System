@@ -7,10 +7,15 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class ShopsPage extends StatelessWidget {
-  const ShopsPage({Key? key}) : super(key: key);
+  bool? fromHomePage;
+
+  ShopsPage({Key? key, this.fromHomePage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool fromHomePageBool =
+        (fromHomePage == null || fromHomePage == true) ? true : false;
+
     var marker = <Marker>[];
     //Shops locations array
     marker = [
@@ -41,7 +46,11 @@ class ShopsPage extends StatelessWidget {
                 ),
                 actions: [
                   InkWell(
-                    onTap: () => {},
+                    onTap: () => {
+                      fromHomePageBool
+                          ? Navigator.pushNamed(context, '/uploaddoc')
+                          : Navigator.pushNamed(context, '/selectpay')
+                    },
                     child: Container(
                       width: MediaQuery.of(context).size.width / 3,
                       height: MediaQuery.of(context).size.height / 8,
@@ -50,10 +59,11 @@ class ShopsPage extends StatelessWidget {
                         border: Border.all(color: Colors.white, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          'Order Now',
-                          style: TextStyle(
+                          fromHomePageBool ? "Order Now" : "Order from here",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
                               fontSize: 18.0,
                               color: Colors.red,
                               fontWeight: FontWeight.w700),
@@ -99,7 +109,11 @@ class ShopsPage extends StatelessWidget {
                 ),
                 actions: [
                   InkWell(
-                    onTap: () => {},
+                    onTap: () => {
+                      fromHomePageBool
+                          ? Navigator.pushNamed(context, '/uploaddoc')
+                          : Navigator.pushNamed(context, '/selectpay')
+                    },
                     child: Container(
                       width: MediaQuery.of(context).size.width / 3,
                       height: MediaQuery.of(context).size.height / 8,
@@ -108,10 +122,11 @@ class ShopsPage extends StatelessWidget {
                         border: Border.all(color: Colors.white, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          'Order Now',
-                          style: TextStyle(
+                          fromHomePageBool ? "Order Now" : "Order from here",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
                               fontSize: 18.0,
                               color: Colors.red,
                               fontWeight: FontWeight.w700),
@@ -157,7 +172,11 @@ class ShopsPage extends StatelessWidget {
                 ),
                 actions: [
                   InkWell(
-                    onTap: () => {},
+                    onTap: () => {
+                      fromHomePageBool
+                          ? Navigator.pushNamed(context, '/uploaddoc')
+                          : Navigator.pushNamed(context, '/selectpay')
+                    },
                     child: Container(
                       width: MediaQuery.of(context).size.width / 3,
                       height: MediaQuery.of(context).size.height / 8,
@@ -166,10 +185,11 @@ class ShopsPage extends StatelessWidget {
                         border: Border.all(color: Colors.white, width: 2.0),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          'Order Now',
-                          style: TextStyle(
+                          fromHomePageBool ? "Order Now" : "Order from here",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
                               fontSize: 18.0,
                               color: Colors.red,
                               fontWeight: FontWeight.w700),

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:print_4_you/pages/shops_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DeliveryDetailsPage extends StatefulWidget {
@@ -195,7 +196,12 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
                               onPressed: () {
                                 prefs.setBool("standardDelivery",
                                     (deliveryType == "Standard"));
-                                Navigator.pushNamed(context, "/shopsmap");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ShopsPage(fromHomePage: false)),
+                                );
                               },
                               child: const Text(
                                 "Next",

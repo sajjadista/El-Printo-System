@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectPaymentPage extends StatefulWidget {
   const SelectPaymentPage({Key? key}) : super(key: key);
@@ -12,6 +14,19 @@ class SelectPaymentPage extends StatefulWidget {
 
 class _SelectPaymentPageState extends State<SelectPaymentPage> {
   String _selectedOption = "";
+
+  final FirebaseFirestore db = FirebaseFirestore.instance;
+  late final SharedPreferences _prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initPrefs();
+  }
+
+  initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +102,21 @@ class _SelectPaymentPageState extends State<SelectPaymentPage> {
                       height: 55,
                       width: double.infinity,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            DateTime eta = DateTime.now();
+                            if (_prefs.getBool("standardDelivery")!) {
+                              DateTime eta = DateTime.now()
+                                  .add(const Duration(minutes: 60));
+                            } else {
+                              DateTime eta = DateTime.now()
+                                  .add(const Duration(minutes: 30));
+                            }
+                            final order = <String, dynamic>{
+                              "color": _prefs.getBool("colorStyle"),
+                              "doublesided": _prefs.getBool("paperSide"),
+                              "eta": eta,
+                            };
+                          },
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
