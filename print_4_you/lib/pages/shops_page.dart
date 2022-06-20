@@ -23,7 +23,7 @@ class ShopsPage extends StatelessWidget {
               context: context,
               builder: (context) => AlertDialog(
                 backgroundColor: Colors.red,
-                title: Text(
+                title: const Text(
                   'DarnLukis',
                   style: TextStyle(
                     fontSize: 20.0,
@@ -31,7 +31,7 @@ class ShopsPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                content: Text(
+                content: const Text(
                   'Price from this shop: 1RM \nDistance from your location: 1.4 km',
                   style: TextStyle(
                     fontSize: 15.0,
@@ -42,18 +42,18 @@ class ShopsPage extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () => {},
-                    child: new Container(
+                    child: Container(
                       width: MediaQuery.of(context).size.width / 3,
                       height: MediaQuery.of(context).size.height / 8,
-                      decoration: new BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        border: new Border.all(color: Colors.white, width: 2.0),
-                        borderRadius: new BorderRadius.circular(10.0),
+                        border: Border.all(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: new Center(
-                        child: new Text(
+                      child: const Center(
+                        child: Text(
                           'Order Now',
-                          style: new TextStyle(
+                          style: TextStyle(
                               fontSize: 18.0,
                               color: Colors.red,
                               fontWeight: FontWeight.w700),
@@ -81,7 +81,7 @@ class ShopsPage extends StatelessWidget {
               context: context,
               builder: (context) => AlertDialog(
                 backgroundColor: Colors.red,
-                title: Text(
+                title: const Text(
                   'Print4You',
                   style: TextStyle(
                     fontSize: 20.0,
@@ -89,7 +89,7 @@ class ShopsPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                content: Text(
+                content: const Text(
                   'Price from this shop: 2RM \nDistance from your location: 4.4 km',
                   style: TextStyle(
                     fontSize: 15.0,
@@ -100,18 +100,18 @@ class ShopsPage extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () => {},
-                    child: new Container(
+                    child: Container(
                       width: MediaQuery.of(context).size.width / 3,
                       height: MediaQuery.of(context).size.height / 8,
-                      decoration: new BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        border: new Border.all(color: Colors.white, width: 2.0),
-                        borderRadius: new BorderRadius.circular(10.0),
+                        border: Border.all(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: new Center(
-                        child: new Text(
+                      child: const Center(
+                        child: Text(
                           'Order Now',
-                          style: new TextStyle(
+                          style: TextStyle(
                               fontSize: 18.0,
                               color: Colors.red,
                               fontWeight: FontWeight.w700),
@@ -139,7 +139,7 @@ class ShopsPage extends StatelessWidget {
               context: context,
               builder: (context) => AlertDialog(
                 backgroundColor: Colors.red,
-                title: Text(
+                title: const Text(
                   'Print Expert',
                   style: TextStyle(
                     fontSize: 20.0,
@@ -147,7 +147,7 @@ class ShopsPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                content: Text(
+                content: const Text(
                   'Price from this shop: 6RM \nDistance from your location: 2.4 km',
                   style: TextStyle(
                     fontSize: 15.0,
@@ -158,18 +158,18 @@ class ShopsPage extends StatelessWidget {
                 actions: [
                   InkWell(
                     onTap: () => {},
-                    child: new Container(
+                    child: Container(
                       width: MediaQuery.of(context).size.width / 3,
                       height: MediaQuery.of(context).size.height / 8,
-                      decoration: new BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        border: new Border.all(color: Colors.white, width: 2.0),
-                        borderRadius: new BorderRadius.circular(10.0),
+                        border: Border.all(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: new Center(
-                        child: new Text(
+                      child: const Center(
+                        child: Text(
                           'Order Now',
-                          style: new TextStyle(
+                          style: TextStyle(
                               fontSize: 18.0,
                               color: Colors.red,
                               fontWeight: FontWeight.w700),
@@ -192,8 +192,7 @@ class ShopsPage extends StatelessWidget {
 
     return Scaffold(
         body: Center(
-            child: Container(
-                child: Column(
+            child: Column(
       children: [
         Flexible(
           child: FlutterMap(
@@ -207,7 +206,7 @@ class ShopsPage extends StatelessWidget {
                     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: ['a', 'b', 'c'],
                 attributionBuilder: (_) {
-                  return Text("© OpenStreetMap contributors");
+                  return const Text("© OpenStreetMap contributors");
                 },
               ),
               MarkerLayerOptions(
@@ -217,6 +216,6 @@ class ShopsPage extends StatelessWidget {
           ),
         )
       ],
-    ))));
+    )));
   }
 }

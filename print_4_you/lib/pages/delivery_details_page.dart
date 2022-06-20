@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DeliveryDetailsPage extends StatefulWidget {
   const DeliveryDetailsPage({Key? key}) : super(key: key);
@@ -15,8 +16,16 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
   String? deliveryAddress;
   String? deliveryType;
 
+  late SharedPreferences prefs;
+
+  initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
   @override
   void initState() {
+    super.initState();
+    initPrefs();
     setState(() {
       deliveryType = "Standard";
     });
@@ -24,6 +33,9 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(deliveryAddress);
+    print(deliveryType);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -59,19 +71,21 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     SizedBox(
                       height: 45,
                       width: 300,
                       child: TextField(
+                        onChanged: (value) =>
+                            setState(() => deliveryAddress = value),
                         maxLines: null,
                         cursorColor: Colors.red,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.red,
                             fontSize: 17,
                             fontWeight: FontWeight.bold),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           contentPadding: EdgeInsets.zero,
                           border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
@@ -93,7 +107,7 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
@@ -122,7 +136,7 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
                             : FontWeight.normal,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Radio(
@@ -149,7 +163,7 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Center(
@@ -161,34 +175,38 @@ class _DeliveryDetailsPageState extends State<DeliveryDetailsPage> {
                     width: 200,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: 200,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: const Color(0xFFE40323),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ), // Background color
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/shopsmap");
-                        },
-                        child: const Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
+                    (deliveryAddress == null || deliveryType == null)
+                        ? const SizedBox()
+                        : SizedBox(
+                            width: 200,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(0xFFE40323),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ), // Background color
+                              ),
+                              onPressed: () {
+                                prefs.setBool("standardDelivery",
+                                    (deliveryType == "Standard"));
+                                Navigator.pushNamed(context, "/shopsmap");
+                              },
+                              child: const Text(
+                                "Next",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ],
