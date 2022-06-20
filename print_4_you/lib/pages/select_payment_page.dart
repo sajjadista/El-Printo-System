@@ -102,20 +102,36 @@ class _SelectPaymentPageState extends State<SelectPaymentPage> {
                       height: 55,
                       width: double.infinity,
                       child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             DateTime eta = DateTime.now();
                             if (_prefs.getBool("standardDelivery")!) {
-                              DateTime eta = DateTime.now()
+                              eta = DateTime.now()
                                   .add(const Duration(minutes: 60));
                             } else {
-                              DateTime eta = DateTime.now()
+                              eta = DateTime.now()
                                   .add(const Duration(minutes: 30));
                             }
+                            String pagerange;
+                            if (_prefs.getBool("isAllPages")!) {
+                              pagerange = "All pages";
+                            } else {
+                              pagerange =
+                                  "${_prefs.getInt("fromPage")!}-${_prefs.getInt("toPage")!}";
+                            }
+
                             final order = <String, dynamic>{
                               "color": _prefs.getBool("colorStyle"),
                               "doublesided": _prefs.getBool("paperSide"),
                               "eta": eta,
+                              "filename": _prefs.getString("filename"),
+                              "pagerange": pagerange
                             };
+
+                            db.collection("orders").add(order).then(
+                                (DocumentReference doc) => print(
+                                    'DocumentSnapshot added with ID: ${doc.id}'));
+
+                            Navigator.popAndPushNamed(context, '/ordersummary');
                           },
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<

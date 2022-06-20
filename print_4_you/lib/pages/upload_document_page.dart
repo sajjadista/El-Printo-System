@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UploadDocumentPage extends StatefulWidget {
   const UploadDocumentPage({Key? key}) : super(key: key);
@@ -12,6 +13,18 @@ class UploadDocumentPage extends StatefulWidget {
 }
 
 class _UploadDocumentPageState extends State<UploadDocumentPage> {
+  late final SharedPreferences _prefs;
+
+  initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initPrefs();
+  }
+
   PlatformFile? document;
   bool? isDocumentUploaded = false;
 
@@ -73,35 +86,34 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                     borderRadius: BorderRadius.circular(15)),
                 child: Center(
                   child: isDocumentUploaded!
-                      ? ColoredBox(
-                          color: Colors.white,
-                          child: Row(children: [
-                            Text(
+                      ? Row(children: [
+                          Expanded(
+                            child: Text(
                               document!.name,
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
                             ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    document = null;
-                                    isDocumentUploaded = false;
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
+                          ),
+                          ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  document = null;
+                                  isDocumentUploaded = false;
+                                });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: Icon(
-                                  Icons.highlight_remove_rounded,
-                                  color: Colors.red,
-                                ))
-                          ]),
-                        )
+                              ),
+                              child: const Icon(
+                                Icons.highlight_remove_rounded,
+                                color: Colors.red,
+                              ))
+                        ])
                       : SizedBox(
                           height: 75,
                           width: 215,
@@ -141,28 +153,31 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
           const SizedBox(
             height: 50,
           ),
-          SizedBox(
-            width: 200,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: const Color(0xFFE40323),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ), // Background color
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, "/printpref");
-              },
-              child: const Text(
-                "Next",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                ),
-              ),
-            ),
-          ),
+          isDocumentUploaded!
+              ? SizedBox(
+                  width: 200,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(0xFFE40323),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ), // Background color
+                    ),
+                    onPressed: () {
+                      _prefs.setString("filename", document!.name);
+                      Navigator.pushNamed(context, "/printpref");
+                    },
+                    child: const Text(
+                      "Next",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
     );

@@ -59,83 +59,87 @@ class OrdersPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           print("3");
           try {
-            return ListView(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              children: snapshot.data!.docs.map((order) {
-                DateTime etaDatetime = (order['eta'] as Timestamp).toDate();
-                int etaCountdownMins =
-                    etaDatetime.difference(DateTime.now()).inMinutes;
-                int etaCountDownHrs =
-                    etaDatetime.difference(DateTime.now()).inHours;
+            return Expanded(
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                children: snapshot.data!.docs.map((order) {
+                  DateTime etaDatetime = (order['eta'] as Timestamp).toDate();
+                  int etaCountdownMins =
+                      etaDatetime.difference(DateTime.now()).inMinutes;
+                  int etaCountDownHrs =
+                      etaDatetime.difference(DateTime.now()).inHours;
 
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    color: const Color(0xFFE40323),
-                    child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Stack(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  order['filename'],
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  order['pagerange'] == "All pages"
-                                      ? "All pages"
-                                      : "Pages " + order['pagerange'],
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  order['color'] ? 'Color' : 'Black and white',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  order['doublesided']
-                                      ? 'Double-sided'
-                                      : 'One-sided',
-                                  style: const TextStyle(color: Colors.white),
-                                )
-                              ],
-                            ),
-                            completed
-                                ? const SizedBox()
-                                : Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(
-                                          etaCountDownHrs > 0
-                                              ? "$etaCountDownHrs hour(s) $etaCountdownMins min(s)"
-                                              : "$etaCountdownMins min(s)",
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xFFE40323)),
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      color: const Color(0xFFE40323),
+                      child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Stack(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    order['filename'],
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    order['pagerange'] == "All pages"
+                                        ? "All pages"
+                                        : "Pages " + order['pagerange'],
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  Text(
+                                    order['color']
+                                        ? 'Color'
+                                        : 'Black and white',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  Text(
+                                    order['doublesided']
+                                        ? 'Double-sided'
+                                        : 'One-sided',
+                                    style: const TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              ),
+                              completed
+                                  ? const SizedBox()
+                                  : Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            etaCountDownHrs > 0
+                                                ? "$etaCountDownHrs hour(s) $etaCountdownMins min(s)"
+                                                : "$etaCountdownMins min(s)",
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xFFE40323)),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                          ],
-                        )),
-                  ),
-                );
-              }).toList(),
+                            ],
+                          )),
+                    ),
+                  );
+                }).toList(),
+              ),
             );
           } on Exception catch (e) {
             return Text("Something went wrong: $e");

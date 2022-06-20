@@ -444,8 +444,9 @@ class _PrintingPreferencesPageState extends State<PrintingPreferencesPage> {
                               if (isAllPages == null || isAllPages == false) {
                                 prefs.setInt("fromPage", fromPage!);
                                 prefs.setInt("toPage", toPage!);
+                                prefs.setBool("isAllPages", false);
                               } else {
-                                prefs.setBool("isAllPages", isAllPages!);
+                                prefs.setBool("isAllPages", true);
                               }
                               prefs.setString("printQuality", printQuality!);
                               prefs.setBool(

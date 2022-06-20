@@ -105,11 +105,7 @@ packages:
       name: file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "3.0.4"
-=======
     version: "4.6.1"
->>>>>>> bfcf3976ea0841e619dc5f71f36880f2ca161025
   firebase_core:
     dependency: "direct main"
     description:

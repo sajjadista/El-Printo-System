@@ -24,10 +24,10 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: index == 0
           ? AppBar(
-              actions: [
+              actions: const [
                 Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: const Image(
+                  padding: EdgeInsets.all(20),
+                  child: Image(
                     width: 120,
                     image: AssetImage('assets/logo.png'),
                   ),
@@ -41,7 +41,7 @@ class _MainPageState extends State<MainPage> {
                         text: "Print4You\n",
                         style: GoogleFonts.montserrat(
                             color: Colors.white,
-                            fontSize: 35,
+                            fontSize: 30,
                             fontWeight: FontWeight.bold)),
                     TextSpan(
                         text: "We deliver your documents wherever, whenever.\n",
@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
                         text: "Welcome back, Muhammad!",
                         style: GoogleFonts.montserrat(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold)),
                   ])),
               flexibleSpace: Container(
